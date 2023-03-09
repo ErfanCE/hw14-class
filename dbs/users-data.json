@@ -1,8 +1,8 @@
 [
   {
-    "firsname": "john",
+    "firstname": "john",
     "lastname": "smith",
-    "username": "john_smith",
+    "username": "nima",
     "password": "user1234",
     "gender": "male"
   }

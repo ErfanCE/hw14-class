@@ -5,8 +5,40 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Admin Panel</title>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
 		<h1>Admin Panel Page</h1>
+
+		<!-- modal -->
+		<div class="w3-container">
+			<div id="modal" class="w3-modal">
+				<div class="w3-modal-content">
+					<div class="w3-container">
+						<span
+							onclick="document.getElementById('modal').style.display='none'"
+							class="w3-button w3-display-topright"
+							>&times;</span
+						>
+						<div class="user-info"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<table border="1px" style="border-collapse: collapse">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Username</th>
+					<th>gender</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<script src="/javascripts/admin.js"></script>
 	</body>
 </html>
