@@ -8,6 +8,6 @@ router.use('/auth', authRoute);
 router.use('/admin', adminRoute);
 
 // Rest API
-router.use('/products', productRoute);
+// router.use('/products', productRoute);
 
 module.exports = router;

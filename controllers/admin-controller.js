@@ -1,6 +1,7 @@
 const { writeFile } = require('node:fs/promises');
 const { join } = require('node:path');
 const users = require('../dbs/users-data.json');
+const { AppError } = require('../utils/app-error');
 
 const getAllUsers = (req, res) => {
 	res.status(200).json({
@@ -9,16 +10,13 @@ const getAllUsers = (req, res) => {
 	});
 };
 
-const getUserByUsername = (req, res) => {
+const getUserByUsername = (req, res, next) => {
 	const { username } = req.params;
 
 	const user = users.find(user => user.username === username);
 
 	if (!user) {
-		return res.status(404).json({
-			status: 'fail',
-			message: `username: ${username} not found.`
-		});
+		return next(new AppError(404, `username: ${username} not found.`));
 	}
 
 	res.status(200).json({
@@ -27,17 +25,14 @@ const getUserByUsername = (req, res) => {
 	});
 };
 
-const removeUserByUsername = async (req, res) => {
+const removeUserByUsername = async (req, res, next) => {
 	try {
 		const { username } = req.params;
 
 		const user = users.find(user => user.username === username);
 
 		if (!user) {
-			return res.status(404).json({
-				status: 'fail',
-				message: `username: ${username} not found.`
-			});
+			return next(new AppError(404, `username: ${username} not found.`));
 		}
 
 		const usersData = users.filter(user => user.username !== username);
@@ -54,10 +49,7 @@ const removeUserByUsername = async (req, res) => {
 	} catch (error) {
 		console.log(`[-] > removeUserByUsername > ${error?.message}`);
 
-		res.status(500).json({
-			status: 'error',
-			message: `internal server error, try again`
-		});
+		next(new AppError(500, `internal server error, try again`));
 	}
 };
 
